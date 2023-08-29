@@ -8,11 +8,11 @@ DEBUG = True
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
-    'docgather.onrender.com'
+    'gtdcoach-backend.onrender.com',
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://docgather.onrender.com'
+    'gtdcoach-backend.onrender.com',
 ]
 
 DATABASES = {
