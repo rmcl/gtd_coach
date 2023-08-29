@@ -273,10 +273,10 @@ ACCOUNT_USERNAME_VALIDATORS = None
 ACCOUNT_CONFIRM_EMAIL_ON_GET = True
 
 # email
-NOREPLY_EMAIL = 'hello@docgather.com'
-DEFAULT_FROM_EMAIL = 'support@docgather.com'
-EMAIL_COMPANY_NAME = 'DocGather'
-EMAIL_COMPANY_URL = 'https://www.docgather.com'
+NOREPLY_EMAIL = 'noreply@russmcl.com'
+DEFAULT_FROM_EMAIL = 'hello@russmcl.com'
+EMAIL_COMPANY_NAME = 'GTD Coach'
+EMAIL_COMPANY_URL = 'https://www.russmcl.com'
 
 
 ENABLE_GOOGLE_TAG_MANAGER = False
