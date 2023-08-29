@@ -12,7 +12,7 @@ ALLOWED_HOSTS = [
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    'gtdcoach-backend.onrender.com',
+    'https://gtdcoach-backend.onrender.com',
 ]
 
 DATABASES = {
