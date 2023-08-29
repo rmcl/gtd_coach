@@ -1,0 +1,15 @@
+<table>
+    <tr>
+        <th>Id</th>
+        <th>From</th>
+        <th>Title</th>
+    </tr>
+</table>
+{% for conversation in conversations %}
+    <tr>
+        <td>{{ conversation.id }}</td>
+        <td>{{ conversation.from }}</td>
+        <td>?? Title ??</td>
+    </tr>
+{% endfor %}
+</table>

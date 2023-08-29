@@ -1,0 +1,9 @@
+{% load access_settings %}
+
+{% block google_tag_manager_body %}
+    {% settings_value "ENABLE_GOOGLE_TAG_MANAGER" as enable_gtm %}
+    {% if enable_gtm %}
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KCR65ZJ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>    
+    {% endif %}
+{% endblock %}

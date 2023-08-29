@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: gtdcoach-backend
+    env: docker
+    repo: https://github.com/rmcl/gtd_coach.git
+    region: oregon
+    plan: free
+    branch: production
+    rootDir: ./backend
+    dockerCommand: invoke collect-static serve
+    numInstances: 1
+    healthCheckPath: /health/
+    buildFilter:
+      paths:
+        - backend/**
+      ignoredPaths:
+        - notebooks/**

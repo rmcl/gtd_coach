@@ -1,0 +1,15 @@
+Django
+django-storages
+django-ses
+subdomains
+django-registration
+django-allauth
+django-filter
+django-rest-framework
+invoke
+dj-database-url
+psycopg2-binary
+twilio
+sentry-sdk
+gunicorn
+whitenoise
