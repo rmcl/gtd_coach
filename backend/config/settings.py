@@ -80,6 +80,7 @@ BOWER_INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'utils.middleware.SubdomainURLRoutingMiddlewareFix',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -89,6 +90,12 @@ MIDDLEWARE = [
     'utils.middleware.TimezoneMiddleware',
     'authentication.middleware.password_change_redirect.PasswordChangeRedirectMiddleware',
 ]
+
+STORAGES = {
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
 
 SITE_ID = 1
 
@@ -266,7 +273,7 @@ ACCOUNT_USERNAME_VALIDATORS = None
 ACCOUNT_CONFIRM_EMAIL_ON_GET = True
 
 # email
-NOREPLY_EMAIL = 'noreply@docgather.com'
+NOREPLY_EMAIL = 'hello@docgather.com'
 DEFAULT_FROM_EMAIL = 'support@docgather.com'
 EMAIL_COMPANY_NAME = 'DocGather'
 EMAIL_COMPANY_URL = 'https://www.docgather.com'
