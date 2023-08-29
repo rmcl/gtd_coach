@@ -1,7 +1,10 @@
 from .settings import *
 import sys
+from urllib.parse import urlparse
 import os
 import dj_database_url
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
 
 DEBUG = False
 
