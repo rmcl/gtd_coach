@@ -79,3 +79,9 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'apikey'
 EMAIL_HOST_PASSWORD = os.environ['SENDGRID_API_KEY']
+
+TWILIO_SETTINGS = {
+    'account_sid': os.environ['TWILIO_ACCOUNT_SID'],
+    'auth_token': os.environ['TWILIO_AUTH_TOKEN'],
+    'from_phone_number': os.environ['TWILIO_FROM_PHONE_NUMBER']
+}
