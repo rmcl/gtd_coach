@@ -57,11 +57,11 @@ INSTALLED_APPS = [
     #'etc',
     #'colorfield',
 
-    'web_base',
+    #'web_base',
     'health_check',
     'authentication',
     'user_conversations',
-    'scheduled_checkins',
+    #'scheduled_checkins',
 
 
     #'phonenumber_field',
