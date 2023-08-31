@@ -31,6 +31,8 @@ class TwilioWebhookHandlerView(View):
         'AccountSid',
         'From',
         'ApiVersion',
+        'NumMedia',
+        'MediaContentType0',
     ]
 
     def handle_twilio_message(self, message):
@@ -43,11 +45,10 @@ class TwilioWebhookHandlerView(View):
         #service.find_and_update_conversation(new_message)
 
     def get_twilio_message_data(self, post_data):
-        return dict(post_data)
-        #    return {
-        #        field: post_data.get(field, None)
-        #        for field in self.TWILIO_FIELDS
-        #    }
+        return {
+            field: post_data.get(field, None)
+            for field in self.TWILIO_FIELDS
+        }
 
     def post(self, request, *args, **kwargs):
         # Get the message the user sent our Twilio number
