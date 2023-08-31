@@ -1,4 +1,4 @@
-from user_conversations.models import Message, UserNumber
+from user_conversations.models import Message, UserNumber, MessageMedia
 from twilio_utils.api import get_twilio_api
 
 
@@ -20,9 +20,24 @@ class UserConversationService:
 
         return message
 
-    def create_message_from_webhook(self, message_details : dict):
+    def create_media_from_webhook(
+        self,
+        message : Message,
+        media_content_type : str,
+        raw_message : dict
+    ):
+        """Create a media from a Twilio message payload."""
+        message_media = MessageMedia.objects.create(
+            message=message,
+            file_type=media_content_type,
+            extra_details=raw_message)
+
+        return message_media
+
+
+    def create_message_from_webhook(self, webhook_payload : dict):
         """Create a message from a Twilio message payload."""
-        message_id = message_details['MessageSid']
+        message_id = webhook_payload['MessageSid']
 
         try:
             return Message.objects.get(message_id=message_id)
@@ -30,11 +45,11 @@ class UserConversationService:
             pass
 
         try:
-            target = UserNumber.objects.get(number=message_details['From'])
+            target = UserNumber.objects.get(number=webhook_payload['From'])
         except UserNumber.DoesNotExist:
-            raise Exception(f'UserNumber {message_details["From"]} not found for message')
+            raise Exception(f'UserNumber {webhook_payload["From"]} not found for message')
 
-        content = message_details['Body']
+        content = webhook_payload['Body']
 
         message = Message.objects.create(
             owner=target.owner,
@@ -42,7 +57,7 @@ class UserConversationService:
             content=content,
             message_id=message_id,
             direction='inbound',
-            extra_details=message_details)
+            extra_details=webhook_payload)
 
         return message
 

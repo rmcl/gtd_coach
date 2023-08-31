@@ -1,3 +1,4 @@
+import requests
 from django.conf import settings
 from twilio.rest import Client
 
@@ -17,6 +18,17 @@ class TwilioAPI:
 
     def get_twilio_client(self):
         return Client(self._account_sid, self._auth_token)
+
+    def get_media_from_url(self, media_url : str):
+        """Get media from a twilio url."""
+        result = requests.get(
+            media_url,
+            auth=(self._account_sid, self._auth_token))
+
+        if result.status_code != 200:
+            raise Exception('Error getting media from url: ' + media_url)
+
+        return result.content
 
     def send_text_message(self, to_phone_number : str, message_body : str):
         """Send a text message to a phone number.

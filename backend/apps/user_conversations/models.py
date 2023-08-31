@@ -14,6 +14,7 @@ class UserNumber(models.Model):
     def __str__(self):
         return f'{self.number} - {self.owner.email} '
 
+
 class Message(models.Model):
     """Messages received from Twilio."""
 
@@ -43,8 +44,29 @@ class Message(models.Model):
     conversation = models.ForeignKey(
         'Conversation',
         on_delete=models.CASCADE,
-        related_name='conversation',
+        related_name='messages',
         null=True)
+
+def message_media_path(message_media_obj, filename):
+    message = message_media_obj.message
+    return f'media/{message.owner.pk}/{filename}'
+
+class MessageMedia(models.Model):
+    """Media attached to a message."""
+
+    message = models.ForeignKey(
+        Message,
+        on_delete=models.CASCADE,
+        related_name='media')
+
+    file = models.FileField(
+        upload_to=message_media_path)
+
+    file_type = models.CharField(max_length=100, null=False, blank=False)
+    extra_details = models.JSONField(encoder=DjangoJSONEncoder)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
 
 class Conversation(models.Model):

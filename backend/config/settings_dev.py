@@ -34,3 +34,8 @@ TWILIO_SETTINGS = {
     'auth_token': '0230e7ba8161d8c45cccb863a3d464f8',
     'from_phone_number': '+18883173613'
 }
+
+
+STORAGES['default'] = {
+    'BACKEND': 'django.core.files.storage.FileSystemStorage',
+}
