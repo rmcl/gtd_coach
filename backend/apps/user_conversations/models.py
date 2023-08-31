@@ -45,7 +45,8 @@ class Message(models.Model):
         'Conversation',
         on_delete=models.CASCADE,
         related_name='messages',
-        null=True)
+        null=True,
+        blank=True)
 
 def message_media_path(message_media_obj, filename):
     message = message_media_obj.message
