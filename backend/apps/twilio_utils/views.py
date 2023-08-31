@@ -12,26 +12,26 @@ class TwilioWebhookHandlerView(View):
     """Handle incoming Twilio webhook."""
 
     TWILIO_FIELDS = [
-            'ToCountry',
-            'ToState',
-            'SmsMessageSid',
-            'ToCity',
-            'FromZip',
-            'SmsSid',
-            'FromState',
-            'SmsStatus',
-            'FromCity',
-            'Body',
-            'FromCountry',
-            'To',
-            'MessagingServiceSid',
-            'ToZip',
-            'NumSegments',
-            'MessageSid',
-            'AccountSid',
-            'From',
-            'ApiVersion'
-        ]
+        'ToCountry',
+        'ToState',
+        'SmsMessageSid',
+        'ToCity',
+        'FromZip',
+        'SmsSid',
+        'FromState',
+        'SmsStatus',
+        'FromCity',
+        'Body',
+        'FromCountry',
+        'To',
+        'MessagingServiceSid',
+        'ToZip',
+        'NumSegments',
+        'MessageSid',
+        'AccountSid',
+        'From',
+        'ApiVersion',
+    ]
 
     def handle_twilio_message(self, message):
         print('Message received: {}'.format(message))
@@ -43,10 +43,11 @@ class TwilioWebhookHandlerView(View):
         #service.find_and_update_conversation(new_message)
 
     def get_twilio_message_data(self, post_data):
-        return {
-            field: post_data.get(field, None)
-            for field in self.TWILIO_FIELDS
-        }
+        return dict(post_data)
+        #    return {
+        #        field: post_data.get(field, None)
+        #        for field in self.TWILIO_FIELDS
+        #    }
 
     def post(self, request, *args, **kwargs):
         # Get the message the user sent our Twilio number
