@@ -23,12 +23,14 @@ class UserConversationService:
     def create_media_from_webhook(
         self,
         message : Message,
+        message_sid : str,
         media_content_type : str,
         raw_message : dict
     ):
         """Create a media from a Twilio message payload."""
         message_media = MessageMedia.objects.create(
             message=message,
+            media_message_id=message_sid,
             file_type=media_content_type,
             extra_details=raw_message)
 

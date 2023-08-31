@@ -35,7 +35,7 @@ class Message(models.Model):
 
     message_id = models.CharField(max_length=255, unique=True)
 
-    content = models.TextField()
+    content = models.TextField(blank=True, null=True)
     extra_details = models.JSONField(encoder=DjangoJSONEncoder)
 
     created_at = models.DateTimeField(auto_now_add=True)
@@ -58,6 +58,8 @@ class MessageMedia(models.Model):
         Message,
         on_delete=models.CASCADE,
         related_name='media')
+
+    media_message_id = models.CharField(max_length=255, unique=True)
 
     file = models.FileField(
         upload_to=message_media_path)

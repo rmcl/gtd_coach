@@ -74,8 +74,11 @@ class TwilioWebhookHandlerView(View):
         for i in range(num_media):
             media_url = webhook_message.get(f'MediaUrl{i}', None)
             media_content_type = webhook_message.get(f'MediaContentType{i}', None)
+            media_message_sid = os.path.basename(media_url)
+
             message_media = service.create_media_from_webhook(
                 message,
+                media_message_sid,
                 media_content_type=media_content_type,
                 raw_message=webhook_message)
 
