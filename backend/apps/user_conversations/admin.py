@@ -1,5 +1,10 @@
 from django.contrib import admin
-from user_conversations.models import Message, UserNumber, Conversation
+from user_conversations.models import (
+    Message,
+    MessageMedia,
+    UserNumber,
+    Conversation
+)
 
 @admin.register(UserNumber)
 class UserNumbers(admin.ModelAdmin):
@@ -10,6 +15,12 @@ class UserNumbers(admin.ModelAdmin):
         'created_at',
         'updated_at'
     )
+
+
+
+class MessageMediaInline(admin.TabularInline):
+    model = MessageMedia
+    extra = 0
 
 @admin.register(Message)
 class Messages(admin.ModelAdmin):
@@ -24,6 +35,9 @@ class Messages(admin.ModelAdmin):
         'updated_at'
     )
 
+    inlines = [
+        MessageMediaInline
+    ]
 
 class ConversationMessageInline(admin.TabularInline):
     model = Message
