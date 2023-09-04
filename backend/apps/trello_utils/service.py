@@ -19,7 +19,7 @@ class TrelloGTDService:
         self._trello_api.add_card(
             trello_list=capture_list,
             card_name=card_name,
-            card_desc=card_description
+            card_description=card_description
         )
 
     def get_closed_cards(self, list_name : str, when : str = 'today'):
