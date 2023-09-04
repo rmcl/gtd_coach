@@ -1,3 +1,4 @@
+from datetime import date, timedelta
 from trello_utils.trello_api import TrelloAPI
 from django.conf import settings
 
@@ -21,14 +22,21 @@ class TrelloGTDService:
             card_desc=card_description
         )
 
-    def get_closed_cards(self, list_name : str):
+    def get_closed_cards(self, list_name : str, when : str = 'today'):
         """Get closed cards from a list."""
         organization = self._trello_api.get_organization()
         boards = self._trello_api.get_boards(organization)
         gtd_board = boards['GTD']
         trello_lists = self._trello_api.get_board_lists(gtd_board)
 
-        self._trello_api.get_closed_cards(trello_lists[list_name])
+        if when == 'today':
+            card_date = date.today()
+        elif when == 'yesterday':
+            card_date = date.today() - timedelta(days=1)
+
+        return self._trello_api.get_closed_cards(
+            trello_lists[list_name],
+            card_date)
 
     def get_next_action_cards(self, count : int):
         organization = self._trello_api.get_organization()

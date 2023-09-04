@@ -4,15 +4,18 @@ from trello_utils.service import get_trello_gtd_service
 
 
 @tool
-def get_recently_closed_cards() -> List[str]:
+def get_recently_closed_cards(when : str = 'today') -> List[str]:
     """Get recently closed cards from the GTD next action"""
 
-    trello_list_name = 'Next Actions'
+    trello_list_name = 'Next Action'
 
     gtd_service = get_trello_gtd_service()
     closed_cards = gtd_service.get_closed_cards(
-            trello_list_name,
-            closed_date)
+        trello_list_name,
+        when=when)
+
+    if not closed_cards:
+        return 'No recently closed cards.'
 
     return '\n'.join([
         f'{card.name} - {card.desc}'
