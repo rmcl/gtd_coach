@@ -10,13 +10,16 @@ urlpatterns = [
     #url(r'^$', RedirectView.as_view(url=reverse_lazy('account_login'))),
     #url(r'^packages/', include('deals.urls')),
 
-    #path(r'^', include('authentication.urls')),
+    path(r'^', include('authentication.urls')),
 
     #url(r'^api/', include('api.urls')),
     path(r'admin/', admin.site.urls),
 
     path(r'twilio/', include('twilio_utils.urls')),
     path(r'conversations/', include('user_conversations.urls')),
+    #path(r'scheduled/', include('scheduled_checkins.urls')),
+
+    path(r'coach/', include('coach_actions.urls')),
 
     # TODO: Change this to a url that makes at least one DB query.
     path(r'health/', TemplateView.as_view(template_name='health.html')),

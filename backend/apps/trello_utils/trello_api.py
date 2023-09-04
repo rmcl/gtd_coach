@@ -1,4 +1,6 @@
-from trello import TrelloClient
+from typing import Optional, Dict, List
+from datetime import date, timedelta
+from trello import TrelloClient, Card
 
 class TrelloAPI:
 
@@ -6,10 +8,17 @@ class TrelloAPI:
 
         self._org_display_name = settings.get('org_display_name', 'Russell GTD')
 
+        trello_api_key = settings.get('TRELLO_API_KEY', None)
+        trello_api_secret = settings.get('TRELLO_API_SECRET', None)
+        trello_api_token = settings.get('TRELLO_API_TOKEN', None)
+
+        if not trello_api_key or not trello_api_secret or not trello_api_token:
+            raise Exception('TRELLO_API_KEY, TRELLO_API_SECRET, or TRELLO_API_TOKEN not found in settings')
+
         self._client = TrelloClient(
-            api_key=API_KEY,
-            api_secret=API_SECRET,
-            token=TRELLO_API_TOKEN
+            api_key=trello_api_key,
+            api_secret=trello_api_secret,
+            token=trello_api_token
         )
 
     def get_organization(self):
@@ -28,7 +37,7 @@ class TrelloAPI:
             for board in boards
         }
 
-    def get_board_lists(self, board):
+    def get_board_lists(self, board) -> Dict[str, List[Card]]:
         return {
             trel_list.name: trel_list
             for trel_list in board.all_lists()
@@ -44,3 +53,31 @@ class TrelloAPI:
         capture_list = lists['Capture']
 
         return capture_list.add_card(name=card_name, desc=card_description)
+
+
+    def get_cards(self, trello_list, count : Optional[int] = None):
+        """Get cards from a list."""
+        organization = self.get_organization()
+        cards = trello_list.list_cards()
+
+        if count is None:
+            return cards
+        return cards[0:count]
+
+    def get_closed_cards(self, trello_list, closed_date : Optional[date] = None):
+        """Get closed cards from a list."""
+        organization = self.get_organization()
+
+        closed_cards = trello_list.list_cards(
+            card_filter='closed')
+
+        if closed_date:
+            closed_cards_on_date = [
+                closed_card
+                for closed_card in closed_cards
+                if  closed_card.date_last_activity.date() == closed_date
+            ]
+
+            return closed_cards_on_date
+
+        return closed_cards

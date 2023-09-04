@@ -85,3 +85,10 @@ TWILIO_SETTINGS = {
     'auth_token': os.environ['TWILIO_AUTH_TOKEN'],
     'from_phone_number': os.environ['TWILIO_FROM_PHONE_NUMBER']
 }
+
+GTD_COACH = {
+    'OPENAI_API_KEY': os.environ['OPENAI_API_KEY'],
+    'TRELLO_API_KEY': os.environ['TRELLO_API_KEY'],
+    'TRELLO_API_SECRET': os.environ['TRELLO_API_SECRET'],
+    'TRELLO_API_TOKEN': os.environ['TRELLO_API_TOKEN'],
+}

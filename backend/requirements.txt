@@ -15,3 +15,6 @@ sentry-sdk
 gunicorn
 whitenoise
 boto3
+langchain
+py-trello
+openai
