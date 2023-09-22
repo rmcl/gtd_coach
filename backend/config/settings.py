@@ -91,6 +91,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'utils.middleware.TimezoneMiddleware',
     'authentication.middleware.password_change_redirect.PasswordChangeRedirectMiddleware',
+    "allauth.account.middleware.AccountMiddleware",
 ]
 
 STORAGES = {

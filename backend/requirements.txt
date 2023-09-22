@@ -3,7 +3,7 @@ django-storages
 django-ses
 subdomains
 django-registration
-django-allauth
+django-allauth>=0.56.1
 django-filter
 django-rest-framework
 django-bower
