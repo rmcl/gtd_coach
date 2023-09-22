@@ -8,6 +8,7 @@ from django.views.decorators.csrf import csrf_exempt
 from twilio.twiml.messaging_response import MessagingResponse
 
 from twilio_utils.api import get_twilio_api
+from coach_actions.service import get_gtd_coach_service
 from user_conversations.service import get_user_conversation_service
 
 @method_decorator(csrf_exempt, name='dispatch')
@@ -49,8 +50,14 @@ class TwilioWebhookHandlerView(View):
                 new_message,
                 webhook_payload)
 
-        # Todo figure this out
-        #service.find_and_update_conversation(new_message)
+
+        gtd_service = get_gtd_coach_service()
+        coach_response = gtd_service.invoke(
+            new_message.target,
+            new_message.content)
+
+        service.send_message(new_message.target, coach_response)
+
 
     def save_media_from_url_to_field(self, content_type, media_url, file_field):
         """Save media from a url to a file field."""

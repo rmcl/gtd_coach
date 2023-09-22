@@ -20,6 +20,28 @@ class UserConversationService:
 
         return message
 
+    def get_messages_for_target_number(
+        self,
+        target_number_id : str,
+        limit : int = 10
+    ):
+        """Get messages for specific target user."""
+        messages = Message.objects.filter(
+            target_id=target_number_id
+        ).order_by('updated_at')[:limit]
+
+        return [
+            {
+                'message_id': message.id,
+                'content': message.content,
+                'direction': message.direction,
+                'created_at': message.created_at,
+                'updated_at': message.updated_at
+            }
+            for message in messages
+        ]
+
+
     def create_media_from_webhook(
         self,
         message : Message,
