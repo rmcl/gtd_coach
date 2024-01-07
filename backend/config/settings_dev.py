@@ -7,7 +7,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     'localhost',
-    '2db4-64-52-138-16.ngrok-free.app',
     'host.docker.internal'
 ]
 
@@ -30,12 +29,18 @@ REST_FRAMEWORK['DEFAULT_AUTHENTICATION_CLASSES'] = (
 )
 
 TWILIO_SETTINGS = {
-    'account_sid': 'ACb50764e96df50eaa4419c959b72b7d4b',
-    'auth_token': '0230e7ba8161d8c45cccb863a3d464f8',
-    'from_phone_number': '+18883173613'
+    'account_sid': None,
+    'auth_token': None,
+    'from_phone_number': None,
 }
 
 
 STORAGES['default'] = {
     'BACKEND': 'django.core.files.storage.FileSystemStorage',
+}
+
+GTD_COACH = {
+    'OPENAI_API_KEY': None,
+    'TRELLO_API_KEY': None,
+    'TRELLO_API_SECRET': None,
 }
