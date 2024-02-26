@@ -11,11 +11,14 @@ DEBUG = False
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
-    'gtdcoach-backend.onrender.com'
+    'gtdcoach-backend.onrender.com',
+    'gtdcoach.rmcl.io',
+
 ]
 
 CSRF_TRUSTED_ORIGINS = [
     'https://gtdcoach-backend.onrender.com',
+    'https://gtdcoach.rmcl.io',
 ]
 
 DATABASES = {
