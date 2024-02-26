@@ -19,12 +19,12 @@ def bash(c):
 
 @task
 def prod_migrate(c):
-    c.run('export $(cat env.prod | xargs) && python manage.py migrate --settings config.settings_prod')
+    c.run('python manage.py migrate --settings config.settings_prod')
 
 @task
 def collect_static(c):
-    c.run('export $(cat env.prod | xargs) && python manage.py collectstatic --settings config.settings_prod --no-input')
+    c.run('python manage.py collectstatic --settings config.settings_prod --no-input')
 
 @task
 def serve(c):
-    c.run('export $(cat env.prod | xargs) && gunicorn wsgi:application --bind 0.0.0.0:80')
+    c.run('gunicorn wsgi:application --bind [::]:8000')
